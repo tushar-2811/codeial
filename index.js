@@ -9,6 +9,10 @@ const router = require('./routes/index');
 app.use('/', router);
 
 
+// ---------- setting our view-engine and views ---------
+app.set('view engine','ejs');
+app.set('views' , './views');
+
 
 
 
