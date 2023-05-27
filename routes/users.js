@@ -5,6 +5,14 @@ const usersController = require('../controllers/users_controller');
 
 router.get('/profile' , usersController.profile);
 
+router.get('/sign-up', usersController.signUp);
+
+router.get('/sign-in', usersController.signIn);
+
+
+router.post('/create' , usersController.create);
+   
+
 //  The .use method is used to register middleware functions
 //  that are executed for every request, regardless of the
 //  HTTP method or the requested path.
