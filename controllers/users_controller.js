@@ -67,5 +67,21 @@ module.exports.create = (req,res)=>{
 
 // sign-in and create a session for the user
 module.exports.createSession = (req,res)=>{
-    // todo later
+    return res.redirect('/users/profile');
+
+}
+
+
+// sign-out and destroying the session
+module.exports.destroySession = (req,res)=>{
+    req.logout((error)=>{
+        if(error){
+            console.log("error is signing-out",error);
+            return res.status(500).send('Internal Server Error');
+        }
+        else{
+            return res.redirect('/');
+        }
+    });
+    
 }
