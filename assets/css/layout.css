@@ -1,5 +1,49 @@
 body{
     margin: 0;
-    text-align: center;
+    /* text-align: center; */
     /* background-color: black; */
+}
+
+
+.post-field{
+    border:  1px solid black;
+    text-align: center;
+}
+
+.posts-list-container{
+    border: 2px solid red;
+    width: 40%;
+    height: auto;
+    margin: auto;
+}
+
+.post{
+    border: 1px solid green;
+}
+
+.name{
+    font-family: sans-serif;
+    color: blueviolet;
+}
+.post-comment{
+   border: 5px solid purple;
+
+}
+
+.post-comment h4{
+    color:  green;
+}
+
+.btn{
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.6rem;
+    color: whitesmoke;
+    background-color: black;
+}
+
+.btn:hover {
+    background-color: grey;
+    color: black;
+    cursor: pointer;
 }
