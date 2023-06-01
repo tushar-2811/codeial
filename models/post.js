@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const User = require('./user');
+
 
 const postSchema = new mongoose.Schema({
     content : {
@@ -7,7 +9,7 @@ const postSchema = new mongoose.Schema({
     },
     user : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'user'
+        ref : 'User'
     }
 
 },{
@@ -16,6 +18,6 @@ const postSchema = new mongoose.Schema({
 
 
 
-const Post = mongoose.model('Post' , postSchema);
+const Post = mongoose.model('Post',postSchema);
 
 module.exports = Post;
