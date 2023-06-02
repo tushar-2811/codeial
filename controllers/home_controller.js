@@ -27,7 +27,12 @@ module.exports.home = function(req,res){
 
 Post.find({})
 .populate('user')
-.populate('commentIds')
+.populate({    // nested population
+    path : 'commentIds',
+    populate : {
+     path : 'commentByUser'
+    }
+})
 // .populate({ path: 'commentIds.user', options: { strictPopulate: false } })
 .then((posts)=>{
             return res.render('home' , {

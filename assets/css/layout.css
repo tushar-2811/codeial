@@ -15,10 +15,12 @@ body{
     width: 40%;
     height: auto;
     margin: auto;
+    margin-top: 1rem;
 }
 
 .post{
     border: 1px solid green;
+   
 }
 
 .name{
@@ -26,7 +28,8 @@ body{
     color: blueviolet;
 }
 .post-comment{
-   border: 5px solid purple;
+   border: 1px solid purple;
+   margin-bottom: 0.5rem;
 
 }
 
