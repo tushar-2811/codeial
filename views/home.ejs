@@ -18,7 +18,16 @@
 
                 <div class="post">
                   <h3>Post-Content:</h3>
-                  <p><%= post.content %> </p>
+                  <p><%= post.content %> </p>  
+                   
+                  <% if(locals.user && locals.user.id == post.user.id) {%> 
+                      
+                    <a href="/posts/destroy/<%= post.id %>">
+                      <input type="submit" value = "Detete" class = "btn">
+                    </a>
+
+                  <%} %>
+                  
 
                   <h3 class = "name"> By: <%= post.user.name %> </h3>
 
