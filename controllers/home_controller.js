@@ -1,4 +1,4 @@
-const { deserializeUser } = require('passport');
+const passport = require('passport');
 const Post = require('../models/post');
 const User = require('../models/user');
 const Comment = require('../models/comment');
@@ -35,10 +35,20 @@ Post.find({})
 })
 // .populate({ path: 'commentIds.user', options: { strictPopulate: false } })
 .then((posts)=>{
-            return res.render('home' , {
+         
+     // find all the users
+     User.find({})
+     .then((users)=>{
+        return res.render('home' , {
             title : 'Codeial | Home',
-            posts : posts
+            posts : posts,
+            all_users : users
         });
+     })
+
+
+
+            
 })
 
 .catch((error)=>{

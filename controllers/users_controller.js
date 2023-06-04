@@ -3,10 +3,25 @@ const User = require('../models/user');
 
 
 module.exports.profile = (req,res)=>{
+
+    User.findById(req.params.id)
+    .then((user)=>{
+        return res.render('user_profile' , {
+            title : "PROFILE",
+            profile_user : user
+            
+        });
+    })
+    .catch((err)=>{
+        console.log('error in finding profile',err);
+        return res.redirect('back');
+    })
+
+    // return res.render('user_profile' , {
+    //     title : "PROFILE"
+    // });
     
-    return res.render('user_profile' , {
-        title : "PROFILE"
-    });
+   
 }
 
 
@@ -65,9 +80,14 @@ module.exports.create = (req,res)=>{
 
 }
 
+
 // sign-in and create a session for the user
 module.exports.createSession = (req,res)=>{
-    return res.redirect('/users/profile');
+    // console.log(req.user);
+    let userId = req.user.id;
+    console.log(userId);
+    
+    return res.redirect(`/users/profile/${userId}`);
 
 }
 
@@ -83,6 +103,26 @@ module.exports.destroySession = (req,res)=>{
             return res.redirect('/');
         }
     });
+    
+}
+
+
+
+// to update
+module.exports.update = (req,res)=>{
+
+    if(req.user.id == req.params.id){
+       
+        User.findByIdAndUpdate(req.params.id , {email : req.body.email , name : req.body.name})
+        .then((user)=>{
+            return res.redirect('back');
+        })
+        
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
+
     
 }
 

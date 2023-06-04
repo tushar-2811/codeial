@@ -42,4 +42,40 @@ module.exports.create = (req,res)=>{
     })
 
 }
+
+
+
+module.exports.destroy = (req,res)=>{
+
+    // to check if even the comment exist or not
+    Comment.findById(req.params.id)
+    .then((comment)=>{
+         if(comment){
+        
+            if(comment.commentByUser == req.user.id){   // authorization to delete comment
+                  
+                // save post id so that i can delete this comment id from the commentIds of post
+                 let postId = comment.commentOnPost;  
+
+                 comment.deleteOne()
+                 
+                 Post.findByIdAndUpdate(postId , { $pull : {commentIds : req.params.id}})
+                 .then(()=>{
+                    console.log("deleted");
+                 })
+                 
+                 return res.redirect('back');
+            }
+
+         }
+         else{
+               console.log('You are not authorized to delete commment');
+               return res.redirect('back');
+         }
+    })
+    .catch((err)=>{
+        console.log("error in finding comment",err);
+        return res.redirect('back');
+    })
+}
    

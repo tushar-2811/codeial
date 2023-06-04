@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
 
-router.get('/profile' ,passport.checkAuthentication , usersController.profile);
+router.get('/profile/:id' ,passport.checkAuthentication , usersController.profile);
 // passport.checkAuthentication will not allow to access this page until the user is not authenticated
 
 
@@ -14,6 +14,8 @@ router.get('/sign-in',usersController.signIn);
 
 
 router.post('/create' , usersController.create);
+
+router.post('/update/:id', passport.checkAuthentication ,usersController.update);
    
 
 //  The .use method is used to register middleware functions
