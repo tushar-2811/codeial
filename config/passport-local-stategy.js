@@ -5,14 +5,16 @@ const LocalStrategy = require('passport-local').Strategy;
 
 // authentication using passport
 passport.use(new LocalStrategy({
-      usernameField : 'email'          // Treat email as username
+      usernameField : 'email',    // Treat email as username
+      passReqToCallback : true         
     },
-    function(email,password,done){
+    function(req,email,password,done){
          // find the user and establish the identity
          User.findOne({email : email})
          .then((user)=>{
             if(!user || user.password != password){
                 console.log("invalid username | password");
+                req.flash('error','invalid username | password');
                 return done(null,false);
             }
             else{
@@ -21,7 +23,8 @@ passport.use(new LocalStrategy({
 
          })
          .catch((error)=>{
-            console.log("error in finding user",error);
+            // console.log("error in finding user",error);
+            req.flash('error',error);
             return done(error);
          })
 
@@ -71,6 +74,7 @@ passport.setAuthenticatedUser = function(req,res,next){
         // are just sending this to locals for the views
         res.locals.user = req.user;
     }
+   
     next();
 }
 

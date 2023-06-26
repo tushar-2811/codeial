@@ -1,14 +1,24 @@
 <script src="https://kit.fontawesome.com/17b998fcdb.js" crossorigin="anonymous"></script>
 
+
+
+
+
     <h1>Codeial / <%= title %></h1>
+
+    <section id = "main-section">
+
+      
 
     <section id = "feed-post">
 
       <div class="post-field">
         <h4>Posts</h4>
         <form action="/posts/create" id = "new-post-form" method = "POST">
+           <!-- <input type="text" name = "content1"> -->
             <textarea name="content"  cols="30" rows="3" placeholder="Type here...." required></textarea>
             <input type="submit" value = "Post" class = "btn">
+            <!-- <button type="submit"  class = "btn">Post</button> -->
         </form>
       </div>
 
@@ -74,6 +84,9 @@
         </div>
     </section>
 
+  
+
+
  <% if(locals.user) {%> 
 
   
@@ -92,4 +105,14 @@
 
   
   <%} %>
+    
+    </section>
+
+  <script src="/js/home_posts.js" defer></script>
+
+
+
+
+    
+
     

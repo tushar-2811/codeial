@@ -5,8 +5,9 @@ const Comment = require('../models/comment');
 
 
 
-module.exports.home = function(req,res){
+module.exports.home = async function(req,res){
 
+//               ------------ Basic -----------
     // console.log(req.cookies);
     // res.cookie('user_id', 25);
 
@@ -23,9 +24,48 @@ module.exports.home = function(req,res){
     //     console.log('error in finding posts',error);
         
     // })
+  
+    //   ----------------- populate-------------
+
+// Post.find({})
+// .populate('user')
+// .populate({    // nested population
+//     path : 'commentIds',
+//     populate : {
+//      path : 'commentByUser'
+//     }
+// })
+// // .populate({ path: 'commentIds.user', options: { strictPopulate: false } })
+// .then((posts)=>{
+         
+//      // find all the users
+//      User.find({})
+//      .then((users)=>{
+//         return res.render('home' , {
+//             title : 'Codeial | Home',
+//             posts : posts,
+//             all_users : users
+//         });
+//      })
 
 
-Post.find({})
+
+            
+// })
+
+// .catch((error)=>{
+//        console.log("error in finding post",error);
+// })
+
+
+
+
+
+//                 ------------ handling "PROMISES" with async/await ---------------
+
+try{
+
+let posts = await Post.find({})
 .populate('user')
 .populate({    // nested population
     path : 'commentIds',
@@ -33,27 +73,23 @@ Post.find({})
      path : 'commentByUser'
     }
 })
-// .populate({ path: 'commentIds.user', options: { strictPopulate: false } })
-.then((posts)=>{
-         
-     // find all the users
-     User.find({})
-     .then((users)=>{
-        return res.render('home' , {
-            title : 'Codeial | Home',
-            posts : posts,
-            all_users : users
-        });
-     })
+
+let users = await User.find({});
+
+return res.render('home' , {
+        title : 'Codeial | Home',
+        posts : posts,
+        all_users : users
+    });
+
+}catch(err){
+    console.log("error in finding post",error);
+    return;
+}
 
 
 
-            
-})
 
-.catch((error)=>{
-       console.log("error in finding post",error);
-})
     
 
  

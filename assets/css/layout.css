@@ -6,7 +6,7 @@ body{
 
 
 .post-field{
-    border:  1px solid black;
+    /* border:  1px solid black; */
     text-align: center;
 }
 
@@ -50,4 +50,20 @@ body{
     background-color: grey;
     color: black;
     cursor: pointer;
+}
+
+
+#main-section{
+    display: flex;
+    flex-direction: row;
+}
+
+#feed-post{
+   width: 70%;
+   padding: 10px;
+}
+
+#user-friends{
+   width: 30%;
+   border: 1px solid greenyellow;
 }

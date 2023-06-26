@@ -18,6 +18,9 @@ const path = require('path');
 
 // }));
 
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
+
 
 
 
@@ -26,6 +29,7 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-stategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 
 const mongoStore = require('connect-mongodb-session')(session);
 
@@ -40,6 +44,9 @@ app.use(cookieParser());
 
 // --- using static files in my application like CSS & javscript & images etc..---
 app.use(express.static('./assets'));
+
+// make the upload path available to the browser
+app.use('/uploads' , express.static(__dirname + '/uploads'));
 
 // ---- including express Layouts
 const expressLayouts = require('express-ejs-layouts');
@@ -92,6 +99,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+app.use(customMware.setFlash);
 
 
 // This function is automatically called as middleware, whenever the app gets initialized
